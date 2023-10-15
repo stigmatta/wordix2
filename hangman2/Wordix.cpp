@@ -110,14 +110,14 @@ GeneratedWord& Wordix::getGenWord()
 
 void Wordix::start()
 {
+    string str;
+    int counter = 0;
     timer.startTimer();
     your_tries = 0;
     uniqueSym = new UniqueSymbols[5];
     for (int i = 0; i < 6; i++)
         game_board[i].setUserWord("_____");
     cout << "Type a word:" << endl;
-    string str;
-    int counter = 0;
     while(your_tries < Wordix::needed_tries)
     {
         uniqueSym = uniqueSymbols(gen_word);
@@ -142,6 +142,7 @@ void Wordix::start()
                 user_word.setColor(i, White);
             cout << endl;
             counter++;
+            all_tries++;
         } while (!(user_word.isWordRight()) || (!(user_word.isInFile())));
         wordCheck(user_word, gen_word);
         game_board[your_tries] = user_word;
@@ -163,6 +164,7 @@ void Wordix::start()
     }
     if (your_tries == Wordix::needed_tries)
         cout << "You lost. Correct word was " << gen_word.getGenWord() << endl;
+    cout << "Amount of words you typed: " <<all_tries<< endl;
     timer.endTimer();
     timer.calculateElapsedTime();
     timer.printElapsedTime();

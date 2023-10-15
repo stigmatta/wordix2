@@ -6,7 +6,7 @@
 #include "Timer.h"
 class Wordix :public Graphics
 {
-	short your_tries=0;
+	int your_tries,all_tries;
 	Keyboard game_keyboard;
 	UniqueSymbols* uniqueSym;
 	Word game_board[6];
