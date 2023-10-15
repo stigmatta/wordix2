@@ -16,17 +16,17 @@ void Wordix::wordCheck(Word& user_word, GeneratedWord& gen_word)
             }
             for (int j = 0; j < 5; j++)
             {
-                if (gen_word.getGenWord()[i] == uniqueSym[j].getCode() && uniqueSym[j].getAmount() > 0)
+                if ((gen_word.getGenWord()[i] == uniqueSym[j].getCode()) && (uniqueSym[j].getAmount() > 0))
                 {
                     uniqueSym[j].setAmount(uniqueSym[j].getAmount() - 1);
-                    game_board.getWord(your_tries).setColor(i, Green);
+                    user_word.setColor(i,Green);
                 }
             }
         }
     }
     for (int i = 0; i < user_word.getLen(); i++)
     {
-        if((gen_word.doesWordHasTheSymb(user_word.getUserWord()[i])&&game_board.getWord(your_tries).getColor(i)!=Green))
+        if((gen_word.doesWordHasTheSymb(user_word.getUserWord()[i])&&user_word.getColor(i) != Green))
         {
             for (int m = 0; m < 3; m++)
             {
@@ -38,15 +38,15 @@ void Wordix::wordCheck(Word& user_word, GeneratedWord& gen_word)
             }
             for (int j = 0; j < 5; j++)
             {
-                if(user_word.getUserWord()[i]==uniqueSym[j].getCode()&&(uniqueSym[j].getAmount()))
+                if(user_word.getUserWord()[i]==uniqueSym[j].getCode()&&(uniqueSym[j].getAmount()>0))
                 {
                     uniqueSym[j].setAmount(uniqueSym[j].getAmount() - 1);
-                    game_board.getWord(your_tries).setColor(i, Blue);
+                    user_word.setColor(i, Blue);
                     break;
                 }
                 else
                 {
-                    if (!(game_board.getWord(your_tries).getColor(i) < 2)) {
+                    if (!(user_word.getColor(i) < 2)) {
                         for (int m = 0; m < 3; m++)
                         {
                             for (int k = 0; k < 10; k++)
@@ -55,16 +55,16 @@ void Wordix::wordCheck(Word& user_word, GeneratedWord& gen_word)
                                     game_keyboard.getKey(m, k).setColor(Red);
                             }
                         }
-                        game_board.getWord(your_tries).setColor(i, Red);
+                        user_word.setColor(i,Red);
                     }
                 }
             }
         }
         else
         {
-            if(!(game_board.getWord(your_tries).getColor(i)<2))
+            if(!(user_word.getColor(i)<2))
             {
-                game_board.getWord(your_tries).setColor(i, Red);
+               user_word.setColor(i, Red);
                 for (int m = 0; m < 3; m++)
                 {
                     for (int k = 0; k < 10; k++)
@@ -79,7 +79,7 @@ void Wordix::wordCheck(Word& user_word, GeneratedWord& gen_word)
 
     }
 }
-UniqueSymbols* Wordix:: uniqueSymbols(GeneratedWord word)
+UniqueSymbols*& Wordix:: uniqueSymbols(GeneratedWord word)
 {
     int tmp = 0;
     string str = word.getGenWord();
@@ -99,11 +99,11 @@ UniqueSymbols* Wordix:: uniqueSymbols(GeneratedWord word)
     }
     return array;
 }
-UniqueSymbols* Wordix::getUnique()
+UniqueSymbols*& Wordix::getUnique()
 {
     return uniqueSym;
 }
-GeneratedWord Wordix::getGenWord()
+GeneratedWord& Wordix::getGenWord()
 {
     return gen_word;
 }
@@ -113,6 +113,8 @@ void Wordix::start()
     timer.startTimer();
     your_tries = 0;
     uniqueSym = new UniqueSymbols[5];
+    for (int i = 0; i < 6; i++)
+        game_board[i].setUserWord("_____");
     cout << "Type a word:" << endl;
     string str;
     int counter = 0;
@@ -126,14 +128,18 @@ void Wordix::start()
                 system("cls");
                 for (int i = 0; i < 6; i++)
                 {
-                    game_board.gameBoardPrint(i);
+                    game_board[i].gameBoardPrint();
                     if (i < 3)
                         game_keyboard.keyboardPrint(i);
+                    else
+                        cout << endl;
                 }
                 cout << "Incorrect word. Try again" << endl;
             }
             cin >> str;
             user_word.setUserWord(str);
+            for (int i = 0; i < 5; i++)
+                user_word.setColor(i, White);
             cout << endl;
             counter++;
         } while (!(user_word.isWordRight()) || (!(user_word.isInFile())));
@@ -142,9 +148,11 @@ void Wordix::start()
         system("cls");
         for (int i = 0; i < 6; i++)
         {
-            game_board.gameBoardPrint(i);
+            game_board[i].gameBoardPrint();
             if (i < 3)
                 game_keyboard.keyboardPrint(i);
+            else
+                cout << endl;
         }
         if(user_word.getUserWord()==gen_word.getGenWord())
         {

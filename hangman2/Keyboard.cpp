@@ -51,10 +51,11 @@ void Keyboard::keyboardPrint(int index)const
         else if (keyboard[index][j].getColor() == Red)
             red();
         cout << setw(2) << keyboard[index][j].getLetter();
+        reset();
     }
      cout << endl;
 }
-Key Keyboard::getKey(int row,int col)const
+Key& Keyboard::getKey(int row,int col)
 {
     return keyboard[row][col];
 }

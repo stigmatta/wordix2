@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
+#include "Graphics.h"
 using namespace std;
-class Word
+class Word:public Graphics
 {
 private:
 	string userWord;
@@ -16,4 +17,6 @@ public:
 	int getLen();
 	int getColor(int index);
 	void setColor(int index,int color);
+	Word& operator=(const Word a);
+	void gameBoardPrint();
 };

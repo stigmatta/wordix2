@@ -127,7 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="GameBoard.h" />
     <ClInclude Include="GeneratedWord.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Timer.h" />
@@ -138,7 +137,6 @@
     <ClInclude Include="Word.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameBoard.cpp" />
     <ClCompile Include="GeneratedWord.cpp" />
     <ClCompile Include="Wordix.cpp" />
     <ClCompile Include="Key.cpp" />

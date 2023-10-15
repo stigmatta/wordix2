@@ -33,6 +33,6 @@ public:
 
     void printElapsedTime()
     {
-        std::cout << "Вы играли " << elapsed_minutes << " минут и " << elapsed_seconds << " секунд" << std::endl;
+        std::cout << "You`ve played " << elapsed_minutes << " minutes and " << elapsed_seconds << " seconds" << std::endl;
     }
 };

@@ -1,7 +1,7 @@
 #include "Key.h"
 Key::Key()
 {
-	color = White;
+	color = Red;
 	letter = ' ';
 }
 void Key::setColor(int color)

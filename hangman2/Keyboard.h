@@ -6,7 +6,8 @@ private:
 	Key keyboard[3][10];
 public:
 	Keyboard();
-	Key getKey(int row, int col)const;
+	Key& getKey(int row, int col);
 	void keyboardPrint(int index)const;
+	friend Key;
 };
 

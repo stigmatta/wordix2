@@ -1,14 +1,14 @@
 #include "Word.h"
 #include <fstream>
-
+#include "Graphics.h"
+#include <iomanip>
 Word::Word()
 {
     LEN = 5;
     colors = new short[LEN];
     for (int i = 0; i < LEN; i++)
-        colors[i] = 3; //white
+        colors[i] = White;
 }
-
 bool Word::isWordRight()
 {
     if (userWord.size() != LEN)
@@ -66,4 +66,30 @@ void Word::setColor(int index,int color)
 void Word::setUserWord(string word)
 {
     userWord = word;
+}
+Word& Word:: operator=(const Word a)
+{
+    userWord = a.userWord;
+    LEN = a.LEN;
+    delete[] colors;
+    colors = new short[5];
+    for (size_t i = 0; i < 5; i++)
+        colors[i] = a.colors[i];
+    return *this; 
+}
+void Word:: gameBoardPrint()
+{
+    for (int j = 0; j < LEN; j++) {
+        if (colors[j] == Green) {
+            green();
+        }
+        else if (colors[j] == Blue) {
+            blue();
+        }
+        else if (colors[j] == Red) {
+            red();
+        }
+        cout << setw(2) << userWord[j];
+        reset();
+    }
 }
